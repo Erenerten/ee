@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Su Kalitesi İzleme Sistemi</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">SuKalite</div>
+        <ul class="nav-links">
+            <li><a href="#anasayfa">Anasayfa</a></li>
+            <li><a href="#hakkimizda">Hakkımızda</a></li>
+            <li><a href="#sensordata">Sensör Verileri</a></li>
+            <li><a href="#hizmetler">Hizmetler</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <section id="anasayfa" class="hero">
+        <h1>Su Kalitesi İzleme Sistemi</h1>
+        <p>Su kaynaklarımızın kalitesini korumak için profesyonel çözümler</p>
+        <button class="cta-button">Kalite Raporu Al</button>
+    </section>
+
+    <section id="hakkimizda" class="about">
+        <h2>Hakkımızda</h2>
+        <div class="about-content">
+            <p>Biz, su kaynaklarının kalitesini izleyen ve koruyan uzman bir ekibiz. Modern teknolojiler ve bilimsel yöntemlerle su kalitesi analizleri yapıyor, çevre dostu çözümler sunuyoruz.</p>
+        </div>
+    </section>
+
+    <section id="sensordata" class="sensor-data">
+        <h2>Gerçek Zamanlı Sensör Verileri</h2>
+        <div class="sensor-grid">
+            <div class="sensor-card">
+                <h3>Sıcaklık</h3>
+                <div class="sensor-value" id="temperature">--°C</div>
+                <canvas id="temperatureChart"></canvas>
+            </div>
+            <div class="sensor-card">
+                <h3>TDS (Toplam Çözünmüş Katı)</h3>
+                <div class="sensor-value" id="tds">-- ppm</div>
+                <canvas id="tdsChart"></canvas>
+            </div>
+            <div class="sensor-card">
+                <h3>Bulanıklık</h3>
+                <div class="sensor-value" id="turbidity">-- NTU</div>
+                <canvas id="turbidityChart"></canvas>
+            </div>
+            <div class="sensor-card">
+                <h3>İletkenlik</h3>
+                <div class="sensor-value" id="conductivity">-- µS/cm</div>
+                <canvas id="conductivityChart"></canvas>
+            </div>
+        </div>
+        <div class="sensor-info">
+            <p>Son Güncelleme: <span id="lastUpdate">--</span></p>
+            <p>Ölçüm Noktası: <span id="location">--</span></p>
+        </div>
+    </section>
+
+    <section id="hizmetler" class="services">
+        <h2>Hizmetlerimiz</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Su Kalitesi Analizi</h3>
+                <p>Fiziksel, kimyasal ve biyolojik parametrelerin ölçümü</p>
+            </div>
+            <div class="service-card">
+                <h3>Online İzleme</h3>
+                <p>Gerçek zamanlı su kalitesi takip sistemi</p>
+            </div>
+            <div class="service-card">
+                <h3>Arıtma Çözümleri</h3>
+                <p>Su arıtma ve filtreleme sistemleri</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="iletisim" class="contact">
+        <h2>İletişim</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Adınız" required>
+            <input type="email" placeholder="E-posta" required>
+            <textarea placeholder="Mesajınız" required></textarea>
+            <button type="submit">Gönder</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 SuKalite - Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
