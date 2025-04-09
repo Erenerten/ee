@@ -34,9 +34,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const contactForm = document.getElementById('contact-form');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Mesajınız gönderildi!');
+
+    // Form verilerini al
+    const formData = {
+        isim: contactForm.querySelector('input[placeholder="Adınız Soyadınız"]').value,
+        email: contactForm.querySelector('input[placeholder="Kurumsal E-posta"]').value,
+        telefon: contactForm.querySelector('input[placeholder="Telefon Numarası"]').value,
+        kurum: contactForm.querySelector('input[placeholder="Kurum/Firma Adı"]').value,
+        sektor: contactForm.querySelector('select').value,
+        mesaj: contactForm.querySelector('textarea').value,
+        tarih: new Date().toLocaleString('tr-TR')
+    };
+
+    // Mevcut talepleri al
+    let talepler = JSON.parse(localStorage.getItem('demoTalepleri')) || [];
+    
+    // Yeni talebi ekle
+    talepler.push(formData);
+    
+    // LocalStorage'a kaydet
+    localStorage.setItem('demoTalepleri', JSON.stringify(talepler));
+
+    // Kullanıcıya bilgi ver
+    alert('Demo talebiniz başarıyla kaydedildi!');
+    
+    // Formu temizle
     contactForm.reset();
 });
+
+// Admin paneli için talepleri görüntüleme fonksiyonu
+function talepleriGoster() {
+    const talepler = JSON.parse(localStorage.getItem('demoTalepleri')) || [];
+    console.table(talepler); // Geliştirici konsolunda talepleri tablo olarak göster
+    return talepler;
+}
 
 // Scroll Animation
 const observerOptions = {
@@ -122,7 +153,7 @@ function updateSensorData() {
     document.getElementById('turbidity').textContent = `${turbidity} NTU`;
     document.getElementById('conductivity').textContent = `${conductivity} µS/cm`;
     document.getElementById('lastUpdate').textContent = time;
-    document.getElementById('location').textContent = 'Ana Ölçüm Noktası';
+    document.getElementById('location').textContent = 'Marmara Denizi';
 
     // Grafikleri güncelle
     updateChart(temperatureChart, temperature);
@@ -153,3 +184,49 @@ setInterval(updateSensorData, 5000);
 
 // Sayfa yüklendiğinde ilk verileri göster
 updateSensorData();
+
+// Modal ve tıklanma sayacı
+document.addEventListener('DOMContentLoaded', function() {
+    let clickCount = localStorage.getItem('modalClickCount') ? parseInt(localStorage.getItem('modalClickCount')) : 0;
+    const modal = document.getElementById('warningModal');
+    const acceptButton = document.getElementById('acceptButton');
+
+    // Modal stillerini JavaScript ile ekle
+    modal.style.display = 'block';
+    modal.style.position = 'fixed';
+    modal.style.zIndex = '9999';
+    modal.style.left = '0';
+    modal.style.top = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+
+    // Modal içerik stillerini ekle
+    const modalContent = modal.querySelector('.modal-content');
+    modalContent.style.backgroundColor = '#ffffff';
+    modalContent.style.margin = '15% auto';
+    modalContent.style.padding = '20px';
+    modalContent.style.borderRadius = '8px';
+    modalContent.style.width = '80%';
+    modalContent.style.maxWidth = '500px';
+    modalContent.style.textAlign = 'center';
+    modalContent.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+
+    // Buton stillerini ekle
+    const button = modalContent.querySelector('button');
+    button.style.backgroundColor = '#0066cc';
+    button.style.color = '#ffffff';
+    button.style.padding = '10px 20px';
+    button.style.border = 'none';
+    button.style.borderRadius = '5px';
+    button.style.cursor = 'pointer';
+    button.style.fontSize = '1rem';
+
+    // Tamam butonuna tıklandığında
+    acceptButton.addEventListener('click', function() {
+        modal.style.display = 'none';
+        clickCount++;
+        localStorage.setItem('modalClickCount', clickCount);
+        console.log('Modal tıklanma sayısı:', clickCount);
+    });
+});
